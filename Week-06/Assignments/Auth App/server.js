@@ -12,9 +12,15 @@ function logger(req, res, next) {
     next();
 }
 
+
+app.get("/", function(req, res) {
+    res.sendFile("./public/index.html")
+})
+
+
+
 app.post("/signup", logger, function (req, res) {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password } = req.body;
 
     if (users.find((user) => user.username === username)) {
         return res.json({
@@ -22,10 +28,7 @@ app.post("/signup", logger, function (req, res) {
         });
     }
 
-    users.push({
-        username: username,
-        password: password,
-    });
+    users.push({ username, password });
 
     res.json({
         message: "You are signed up successfully!",
@@ -95,4 +98,4 @@ app.get("/me", logger, auth, function (req, res) {
     }
 });
 
-app.listen(9000 , () =>{console.log("Running on Port 9000")});
+app.listen(9000 , () =>{console.log("Running on Port 3000")});
