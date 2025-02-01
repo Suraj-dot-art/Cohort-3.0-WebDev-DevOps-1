@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { dirname } = require('path');
 
 const users = [];
 app.use(express.json());
@@ -12,10 +13,11 @@ function logger(req, res, next) {
     next();
 }
 
-
-app.get("/", function(req, res) {
-    res.sendFile("./public/index.html")
-})
+//write this properly for your directories
+// app.get("/", function(req, res) {
+//     res.sendFile(__dirname + "Assingnments/Auth App/public/index.html")
+// })
+// console.log(res.sendFile(__dirname + "Assingnments/Auth App/public/index.html"));
 
 
 
@@ -98,4 +100,4 @@ app.get("/me", logger, auth, function (req, res) {
     }
 });
 
-app.listen(9000 , () =>{console.log("Running on Port 3000")});
+app.listen(3000 , () =>{console.log("Running on Port 3000")});
